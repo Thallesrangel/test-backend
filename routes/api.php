@@ -19,3 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('user', 'UserController');
+Route::apiResource('user_category', 'UserCategoryController')->only(['index']);
