@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\UserCategoryResource;
 
 class UserResource extends JsonResource
 {
@@ -17,7 +18,7 @@ class UserResource extends JsonResource
         return [
             'name' => $this->name,
             'document'   => $this->document,
-            'user_category_id' => $this->id_user_category,
+            'id_user_category' => $this->id_user_category,
             'email'  => $this->email,
         ];
     }

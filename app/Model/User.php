@@ -9,10 +9,10 @@ class User extends Model
 {
     protected $table = "users";
     protected $primaryKey  = 'id_user';
-    protected $fillable = ['name', 'user_category_id', 'document', 'email', 'password'];
+    protected $fillable = ['name', 'id_user_category', 'document', 'email', 'password'];
 
     public function category()
     {
-        return $this->belongsTo(UserCategory::class, 'user_category_id', 'id_user_category');
+        return $this->belongsTo(UserCategory::class, 'id_user_category');
     }
 }

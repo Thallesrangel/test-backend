@@ -31,7 +31,7 @@ class UserController extends Controller
             $this->user::create($request->all());
         }
 
-        return response()->json(['success' => 'registred'], 201);;
+        return response()->json(['success' => 'registered'], 201);
     }
 
     public function show($id)
