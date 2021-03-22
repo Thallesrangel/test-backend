@@ -6,6 +6,8 @@ use App\Http\Resources\UserResource;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
 use App\Model\User;
+use App\Model\Wallet;
+
 use App\Http\Requests\UserRequest;
 
 class UserController extends Controller
@@ -27,19 +29,26 @@ class UserController extends Controller
     {
         $validated = $request->validated();
         
-        if ($validated) {
-            $this->user::create($request->all());
+        if ( $validated ) {
+            $user = $this->user::create($request->all());
+            $lastInsertIdUser = $user->id_user;
+
+            # creating wallet with id user
+            $wallet = new Wallet();
+            $wallet->id_user = $lastInsertIdUser;
+            $wallet->amount = 0;
+            $wallet->save();
         }
 
         return response()->json(['success' => 'registered'], 201);
     }
 
-    public function show($id)
+    public function show($idUser)
     {
-        $user = $this->user::find($id);
+        $user = $this->user::find($idUser);
         
-        if (!$user) {
-            throw ValidationException::withMessages(['not_found' => 'Usuário não encontrado']);
+        if ( !$user ) {
+            throw ValidationException::withMessages(['not_found' => 'Usuário informado não encontrado.']);
         }
         
         return new UserResource($user);
@@ -58,10 +67,10 @@ class UserController extends Controller
         return new UserResource($data);
     }
 
-    public function destroy($id)
+    public function destroy($idUser)
     {
-         if( !$data = $this->user->find($id)) {
-            return response()->json(['error' => 'usuário não encontrado'], 404);
+         if( !$data = $this->user->find($idUser)) {
+            return response()->json(['error' => 'usuário informado não encontrado.'], 404);
         }
 
         if ( !$delete = $data->delete() ) {

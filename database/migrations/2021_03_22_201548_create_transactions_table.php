@@ -15,7 +15,15 @@ class CreateTransactionsTable extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id('id_transaction');
+            $table->decimal('amount', 10, 2);
+            $table->unsignedBigInteger('payer');
+            $table->unsignedBigInteger('payee');
             $table->timestamps();
+        });
+
+        Schema::table('transactions', function($table) {
+            $table->foreign('payer')->references('id_user')->on('users');
+            $table->foreign('payee')->references('id_user')->on('users');
         });
     }
 
