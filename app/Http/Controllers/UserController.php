@@ -19,6 +19,17 @@ class UserController extends Controller
         $this->user = new User();
     }
 
+    /**
+     * @OA\Get(
+     *     path="/api/user",
+     *     description="Retorna todos os usuários",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Usuários retornados com sucesso",
+     *     )
+     * )
+    */
+
     public function index()
     {
         $data = $this->user::with('category')->get();
