@@ -42,6 +42,6 @@ Dentro da pasta .docker, excluir as pastas logs e data
 
 [Link para acessar](http://localhost:8080)
 
--Servidor: mysqldb
--Utilizador: root
--Palavra-passe: root
+- Servidor: mysqldb
+- Utilizador: root
+- Palavra-passe: root

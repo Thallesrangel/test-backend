@@ -129,9 +129,9 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Carteira do usuário informada"
+                        "description": "Carteira do usuário informada, retorna informações"
                     },
-                    "404": {
+                    "422": {
                         "description": "Usuário informado não encontrado."
                     }
                 }
