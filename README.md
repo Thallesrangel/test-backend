@@ -19,9 +19,9 @@ Por não ter disponível o OS Linux, fiz a configuração com o Windows
 
 #### Opcionais 
 
-- docker-compose up -d  [ Executando o container em detached mode usando a flag -d, continua rodando em segundo plano, liberando o seu terminal.]
+- docker-compose up -d  [Executando o container em detached mode usando a flag -d, continua rodando em segundo plano, liberando o seu terminal]
 
-- docker-compose up --build [ Executado quando houver alterações em seu arquivo dockerfile ou docker-compose ]
+- docker-compose up --build [Executado quando houver alterações em seu arquivo dockerfile ou docker-compose]
 
 ## 🚧 Erros comuns
 

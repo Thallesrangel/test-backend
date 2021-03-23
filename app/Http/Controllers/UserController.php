@@ -33,7 +33,7 @@ class UserController extends Controller
 
     public function index()
     {
-        $data = $this->user::with('category')->get();
+        $data = $this->user::with('category')->where('flag_excluido', '=', 0)->get();
         return UserResource::collection($data);
     }
 
@@ -140,6 +140,7 @@ class UserController extends Controller
      *      )
      * )
     */
+
     public function show($idUser)
     {
         $user = $this->user::find($idUser);
@@ -150,7 +151,7 @@ class UserController extends Controller
         
         return new UserResource($user);
     }
-    
+
     public function update(UserRequest $request, $id)
     {
 
@@ -166,11 +167,13 @@ class UserController extends Controller
 
     public function destroy($idUser)
     {
-         if ( !$data = $this->user->find($idUser) ) {
+        if ( !$data = $this->user->find($idUser) ) {
             return response()->json(['error' => 'usuário informado não encontrado.'], 404);
         }
 
-        if ( !$delete = $data->delete() ) {
+        $data->flag_excluido = 1;
+        
+        if ( !$delete = $data->save() ) {
             return response()->json(['error' => 'usuário não deletado', 500]);
         }
 
