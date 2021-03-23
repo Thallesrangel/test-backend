@@ -7,11 +7,132 @@
     "paths": {
         "/api/user": {
             "get": {
+                "tags": [
+                    "user"
+                ],
                 "description": "Retorna todos os usuários",
                 "operationId": "App\\Http\\Controllers\\UserController::index",
                 "responses": {
                     "200": {
-                        "description": "Todos os usuários"
+                        "description": "Usuários retornados com sucesso."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "description": "Criando novo usuário",
+                "operationId": "App\\Http\\Controllers\\UserController::store",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Nome completo do usuário",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id_user_category",
+                        "in": "query",
+                        "description": "Categorias ( ID: 1 - Comum ou 2 - Lojistas)",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "document",
+                        "in": "query",
+                        "description": "Documento",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "Senha",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Registrado com sucesso."
+                    },
+                    "422": {
+                        "description": "Dados ausentes."
+                    }
+                }
+            }
+        },
+        "/api/user/{user}": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "description": "Retorna o usuário com id especificado",
+                "operationId": "App\\Http\\Controllers\\UserController::show",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "ID do usuário",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Usuário retornado com sucesso."
+                    },
+                    "422": {
+                        "description": "Usuário informado não encontrado."
+                    }
+                }
+            }
+        },
+        "/api/wallet/{user}": {
+            "get": {
+                "tags": [
+                    "wallet"
+                ],
+                "description": "Retorna a carteira do usuário",
+                "operationId": "App\\Http\\Controllers\\WalletController::show",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "ID do usuário",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Carteira do usuário informada"
+                    },
+                    "404": {
+                        "description": "Usuário informado não encontrado."
                     }
                 }
             }

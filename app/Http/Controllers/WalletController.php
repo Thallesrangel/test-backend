@@ -19,6 +19,31 @@ class WalletController extends Controller
         $this->wallet = new Wallet();
     }
 
+    /**
+     * @OA\Get(
+     *     tags={"wallet"},
+     *     path="/api/wallet/{user}",
+     *     description="Retorna a carteira do usuário",
+     *     @OA\Parameter(
+     *         name="user",
+     *         in="path",
+     *         description="ID do usuário",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Carteira do usuário informada, retorna informações",
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Usuário informado não encontrado."
+     *     )
+     * )
+    */
+
     public function show($idUser)
     {
         $user = $this->user->find($idUser);

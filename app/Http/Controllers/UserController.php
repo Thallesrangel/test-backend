@@ -21,13 +21,14 @@ class UserController extends Controller
 
     /**
      * @OA\Get(
+     *     tags={"user"},
      *     path="/api/user",
      *     description="Retorna todos os usuários",
      *     @OA\Response(
      *         response=200,
-     *         description="Usuários retornados com sucesso",
+     *         description="Usuários retornados com sucesso.",
      *     )
-     * )
+     * ),
     */
 
     public function index()
@@ -35,6 +36,67 @@ class UserController extends Controller
         $data = $this->user::with('category')->get();
         return UserResource::collection($data);
     }
+
+    /**
+     * @OA\Post(
+     *     tags={"user"},
+     *     path="/api/user",
+     *     description="Criando novo usuário",
+     *     @OA\Parameter(
+     *         name="name",
+     *         in="query",
+     *         description="Nome completo do usuário",
+     *         required=true,
+     *          @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="id_user_category",
+     *         in="query",
+     *         description="Categorias ( ID: 1 - Comum ou 2 - Lojistas)",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="document",
+     *         in="query",
+     *         description="Documento",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="email",
+     *         in="query",
+     *         description="Email",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="password",
+     *         in="query",
+     *         description="Senha",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="string",
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Registrado com sucesso.",
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Dados ausentes."
+     *     )
+     * )
+    */
 
     public function store(UserRequest $request)
     {
@@ -54,6 +116,30 @@ class UserController extends Controller
         return response()->json(['success' => 'registered'], 201);
     }
 
+    /**
+     * @OA\Get(
+     *     tags={"user"},
+     *     path="/api/user/{user}",
+     *     description="Retorna o usuário com id especificado",
+     *     @OA\Parameter(
+     *         name="user",
+     *         in="path",
+     *         description="ID do usuário",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Usuário retornado com sucesso.",
+     *     ),
+     *      @OA\Response(
+     *         response=422,
+     *         description="Usuário informado não encontrado.",
+     *      )
+     * )
+    */
     public function show($idUser)
     {
         $user = $this->user::find($idUser);
@@ -64,7 +150,7 @@ class UserController extends Controller
         
         return new UserResource($user);
     }
-
+    
     public function update(UserRequest $request, $id)
     {
 
@@ -80,7 +166,7 @@ class UserController extends Controller
 
     public function destroy($idUser)
     {
-         if( !$data = $this->user->find($idUser)) {
+         if ( !$data = $this->user->find($idUser) ) {
             return response()->json(['error' => 'usuário informado não encontrado.'], 404);
         }
 
