@@ -45,3 +45,6 @@ Dentro da pasta .docker, excluir as pastas logs e data
 - Servidor: mysqldb
 - Utilizador: root
 - Palavra-passe: root
+
+## Comando para executar testes com PHPUnit
+- vendor/bin/phpunit tests
