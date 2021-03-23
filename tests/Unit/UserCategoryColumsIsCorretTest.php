@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Model\UserCategory;
 
-class UserCategoryTest extends TestCase
+class UserCategoryColumsIsCorretTest extends TestCase
 {
     /** @test **/
     public function check_if_user_category_columns_is_corret()

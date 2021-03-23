@@ -4,19 +4,21 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
-use App\Model\Wallet;
+use App\Model\User;
 
-class WalletTest extends TestCase
+class UserColumsIsCorretTestTest extends TestCase
 {
     /** @test **/
-    public function check_if_wallet_columns_is_corret()
+    public function check_if_user_columns_is_corret()
     {
-        $user = new Wallet();
+        $user = new User();
         
         $expected = [
-            'id_wallet',
-            'id_user',
-            'amount'
+            'name',
+            'id_user_category',
+            'document',
+            'email',
+            'password'
         ];
 
         $arrayCompared = array_diff($expected, $user->getFillable());
