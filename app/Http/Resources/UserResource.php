@@ -18,8 +18,8 @@ class UserResource extends JsonResource
         return [
             'name' => $this->name,
             'document'   => $this->document,
-            'category' => UserCategoryResource::collection($this->category),
             'email'  => $this->email,
-        ];
+            'category' => $this->category
+        ]; 
     }
 }

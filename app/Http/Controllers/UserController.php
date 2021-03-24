@@ -7,6 +7,7 @@ use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
 use App\Model\User;
 use App\Model\Wallet;
+use Illuminate\Support\Facades\Hash;
 
 use App\Http\Requests\UserRequest;
 
@@ -16,6 +17,7 @@ class UserController extends Controller
 
     public function __construct()
     {
+        $this->middleware('apiJwt')->except(['store']);
         $this->user = new User();
     }
 
@@ -103,7 +105,14 @@ class UserController extends Controller
         $validated = $request->validated();
         
         if ( $validated ) {
-            $user = $this->user::create($request->all());
+            $user = $this->user;
+            $user->name = $request->name;
+            $user->id_user_category = $request->id_user_category;
+            $user->document = $request->document;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->save();
+
             $lastInsertIdUser = $user->id_user;
 
             # creating wallet with id user
