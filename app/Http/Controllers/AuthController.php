@@ -14,6 +14,8 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
+
+        // Validação
         $credentials = $request->only(['email', 'password']);
        
         if (!$token = auth('api')->attempt($credentials)) {
