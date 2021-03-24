@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Model\User;
 use App\Model\Wallet;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 use App\Http\Requests\UserRequest;
 
@@ -35,7 +36,10 @@ class UserController extends Controller
 
     public function index()
     {
-        $data = $this->user::with('category')->where('flag_excluido', '=', 0)->get();
+        $data = $this->user::with('category')
+                            ->where('id_user', '=', Auth::user()->id_user)
+                            ->where('flag_excluido', '=', 0)
+                            ->get();
         return UserResource::collection($data);
     }
 
@@ -153,7 +157,15 @@ class UserController extends Controller
     public function show($idUser)
     {
         $user = $this->user::find($idUser);
-        
+
+        if ( empty($user) ) {
+            throw ValidationException::withMessages(['user_not_exists' => 'usuário não existe.']);
+        }
+
+        if ( $user->id_user != Auth::user()->id_user ) {
+            throw ValidationException::withMessages(['user_not_found' => 'Acesso ao usuário negado!']);
+        }
+
         if ( !$user ) {
             throw ValidationException::withMessages(['not_found' => 'Usuário informado não encontrado.']);
         }
@@ -161,10 +173,19 @@ class UserController extends Controller
         return new UserResource($user);
     }
 
-    public function update(UserRequest $request, $id)
+    public function update(UserRequest $request, $idUser)
     {
 
-        $data = $this->user->findOrFail($id);
+        $data = $this->user->find($idUser);
+
+        if ( empty($data) ) {
+            throw ValidationException::withMessages(['user_not_exists' => 'usuário não existe.']);
+        }
+
+        if ( $data->id_user != Auth::user()->id_user ) {
+            throw ValidationException::withMessages(['user_acess_forbidden' => 'Acesso ao usuário negado.']);
+        }
+
         $validated = $request->validated();
 
         if ($validated) {
@@ -178,6 +199,10 @@ class UserController extends Controller
     {
         if ( !$data = $this->user->find($idUser) ) {
             return response()->json(['error' => 'usuário informado não encontrado.'], 404);
+        }
+
+        if ( $data->id_user != Auth::user()->id_user ) {
+            throw ValidationException::withMessages(['user_acess_forbidden' => 'Acesso ao usuário negado!']);
         }
 
         $data->flag_excluido = 1;
