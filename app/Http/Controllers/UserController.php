@@ -211,6 +211,6 @@ class UserController extends Controller
             return response()->json(['error' => 'usuário não deletado', 500]);
         }
 
-        return response()->json(['response' => $delete]);
+        return response()->json(['response' => $delete], 200);
     }
 }

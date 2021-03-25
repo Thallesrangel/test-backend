@@ -4,6 +4,7 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 use App\model\UserCategory;
+use App\model\Wallet;
 
 class User extends Model
 {
@@ -15,5 +16,10 @@ class User extends Model
     public function category()
     {
         return $this->belongsTo(UserCategory::class, 'id_user_category');
+    }
+
+    public function wallet()
+    {
+        return $this->belongsTo(Wallet::class, 'id_user');
     }
 }
