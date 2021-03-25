@@ -21,8 +21,14 @@ class TransactionController extends Controller
     }
     
     public function index()
-    {
-        $this->transaction->where('id_user', '=', Auth::user()->id_user)->get();
+    {   
+        $idUser = Auth::user()->id_user;
+        $allTransactions = $this->transaction->where('payer', '=', $idUser)
+                                            ->orWhere('payee', $idUser)
+                                            ->get();
+                                            
+        return TransactionResource::collection($allTransactions);
+    
     }
 
     public function store(Request $request)
@@ -85,11 +91,6 @@ class TransactionController extends Controller
         }
         
         return new TransactionResource($data);
-    }
-
-    public function update(Request $request, $id)
-    {
-    
     }
 
     private function debitAmount() {
