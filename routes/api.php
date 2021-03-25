@@ -9,4 +9,4 @@ Route::post('auth/logout', 'AuthController@logout');
 Route::apiResource('user', 'UserController');
 Route::apiResource('user_category', 'UserCategoryController')->only(['index']);
 Route::apiResource('wallet', 'WalletController')->only(['show', 'update']);
-Route::apiResource('transaction', 'TransactionController');
+Route::apiResource('transaction', 'TransactionController')->except(['destroy']);

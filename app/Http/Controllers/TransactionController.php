@@ -92,12 +92,6 @@ class TransactionController extends Controller
     
     }
 
-    public function destroy($id)
-    {
-    
-    }
-    
-
     private function debitAmount() {
 
     }
