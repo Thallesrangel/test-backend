@@ -57,7 +57,7 @@ class TransactionController extends Controller
         $transaction_payer = $this->wallet::where('id_user', '=', Auth::user()->id_user)->update($data_payer);
 
         $data_payee = [
-            'amount' => $user_wallet_payer->amount + $value ,
+            'amount' => $user_payee->wallet->amount + $value ,
             'updated_at' => now()
         ];
 
