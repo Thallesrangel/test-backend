@@ -37,6 +37,7 @@ class UserRequest extends FormRequest
     public function messages()
     {
         return [
+            'required' => 'Campo obrigatório',
             'name.required' => 'Campo nome é obrigatório',
             'id_user_category.required' => 'Categoria de usuário é obrigatório',
             'email.required' => 'Campo email é obrigatório',
