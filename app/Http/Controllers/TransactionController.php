@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\TransactionResource;
+use App\Http\Requests\TransactionRequest;
 use App\Model\Transaction;
 use App\Model\User;
 use App\Model\Wallet;
@@ -42,9 +43,9 @@ class TransactionController extends Controller
         return TransactionResource::collection($allTransactions);
     }
 
-    public function store(Request $request)
+    public function store(TransactionRequest $request)
     {   
-        // Inserir Validação
+        $request->validated();
 
         if (Auth::user()->id_user_category == 2) {
             throw ValidationException::withMessages(['forbidden_transaction' => 'Lojistas apenas realizam pagamentos.']);
@@ -62,7 +63,7 @@ class TransactionController extends Controller
         $user_payee = $this->user->with('wallet')->where('document', '=', $document_payee)->first();
 
         if (!$user_payee) {
-            throw ValidationException::withMessages(['user_not_funds' => 'Usuário beneficiário não encontrado.']);
+            throw ValidationException::withMessages(['user_not_funds' => 'Beneficiário não encontrado.']);
         }
         
         if ($user_payee->document == Auth::user()->document) {
@@ -98,7 +99,7 @@ class TransactionController extends Controller
         if ($transaction_payer == false OR $transaction_payee == false) {
             throw ValidationException::withMessages(['error' => 'Algo de errado não está certo.']);
         }
-
+    
         return response()->json(['success' => 'Transação realizada com sucesso', 200]);
     }
 

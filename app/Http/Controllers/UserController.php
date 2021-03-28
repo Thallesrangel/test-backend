@@ -103,26 +103,23 @@ class UserController extends Controller
 
     public function store(UserRequest $request)
     {
-        $validated = $request->validated();
+        $request->validated();
         
-        if ( $validated ) {
-            $user = $this->user;
-            $user->name = $request->name;
-            $user->id_user_category = $request->id_user_category;
-            $user->document = $request->document;
-            $user->email = $request->email;
-            $user->password = Hash::make($request->password);
-            $user->save();
+        $user = $this->user;
+        $user->name = $request->name;
+        $user->id_user_category = $request->id_user_category;
+        $user->document = $request->document;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->save();
 
-            $lastInsertIdUser = $user->id_user;
+        $lastInsertIdUser = $user->id_user;
 
-            # creating wallet with id user
-            $wallet = new Wallet();
-            $wallet->id_user = $lastInsertIdUser;
-            $wallet->amount = 0;
-            $wallet->save();
-        }
-
+        $wallet = new Wallet();
+        $wallet->id_user = $lastInsertIdUser;
+        $wallet->amount = 0;
+        $wallet->save();
+        
         return response()->json(['success' => 'registered'], 201);
     }
 

@@ -25,11 +25,11 @@ class apiProtectedRoute extends BaseMiddleware
         } catch (Exception $exception) {
             
             if ($exception instanceof TokenInvalidException){
-                return response()->json(['status' => 'Token is Invalid']);
+                return response()->json(['status' => 'Token inválido']);
             } else if ($exception instanceof TokenExpiredException){
-                return response()->json(['status' => 'Token is Expired']);
+                return response()->json(['status' => 'Token expirado.']);
             } else {
-                return response()->json(['status' => 'Authorization Token not found']);
+                return response()->json(['status' => 'Autorização do Token não encontrada.']);
             }
 
         }

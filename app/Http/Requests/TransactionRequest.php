@@ -13,7 +13,7 @@ class TransactionRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,20 @@ class TransactionRequest extends FormRequest
      */
     public function rules()
     {
+        $rules = [
+            'amount' => 'required',
+            'document' => 'required|integer'
+        ];
+
+        return $rules;
+    }
+
+    public function messages()
+    {
         return [
-            //
+            'required' => 'Campo obrigatório',
+            'amount.required' => 'Informe o valor',
+            'document.required' => 'Informe o documento do beneficiário'
         ];
     }
 }
