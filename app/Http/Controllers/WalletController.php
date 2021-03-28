@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Validation\ValidationException;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Model\User;
 use App\Model\Wallet;
 use App\Http\Resources\WalletResource;
@@ -14,7 +14,8 @@ class WalletController extends Controller
     protected $wallet;
 
     public function __construct()
-    {
+    {   
+        $this->middleware('apiJwt');
         $this->user = new User();
         $this->wallet = new Wallet();
     }
@@ -25,15 +26,6 @@ class WalletController extends Controller
      *     path="/api/wallet/{user}",
      *     security={{"bearer_token":{}}},
      *     description="Retorna a carteira do usuário",
-     *     @OA\Parameter(
-     *         name="user",
-     *         in="path",
-     *         description="ID do usuário",
-     *         required=true,
-     *         @OA\Schema(
-     *             type="integer",
-     *         )
-     *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Carteira do usuário informada, retorna informações",
@@ -45,9 +37,9 @@ class WalletController extends Controller
      * )
     */
 
-    public function show($idUser)
+    public function show()
     {
-        $user = $this->user->find($idUser);
+        $user = $this->user->find(Auth::user()->id_user);
         
         if ( !$user ) {
             throw ValidationException::withMessages(['error' => 'Usuário informado não encontrado.']);
@@ -61,5 +53,4 @@ class WalletController extends Controller
         
         return new WalletResource($wallet);
     }
-
 }

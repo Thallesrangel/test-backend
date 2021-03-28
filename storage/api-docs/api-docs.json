@@ -67,7 +67,12 @@
                     "422": {
                         "description": "Informe o token"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
             }
         },
         "/api/transaction": {
@@ -210,17 +215,6 @@
                 ],
                 "description": "Retorna a carteira do usuário",
                 "operationId": "App\\Http\\Controllers\\WalletController::show",
-                "parameters": [
-                    {
-                        "name": "user",
-                        "in": "path",
-                        "description": "ID do usuário",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "Carteira do usuário informada, retorna informações"
@@ -228,7 +222,12 @@
                     "422": {
                         "description": "Usuário informado não encontrado."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
             }
         }
     },
