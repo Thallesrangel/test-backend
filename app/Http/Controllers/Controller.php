@@ -10,7 +10,11 @@ use Illuminate\Routing\Controller as BaseController;
 /**
  * @OA\Info(
  *    title="Test ApplicationAPI",
+ *    description="Documentação Swagger no Laravel",
  *    version="1.0.0",
+ *    @OA\Contact(
+ *      email="rangelthr@gmail.com"
+ *    ),
  * )
  */
 class Controller extends BaseController

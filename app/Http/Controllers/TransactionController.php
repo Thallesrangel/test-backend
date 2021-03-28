@@ -20,6 +20,18 @@ class TransactionController extends Controller
         $this->user = new User();
     }
     
+    /**
+     * @OA\Get(
+     *     tags={"Transaction"},
+     *     path="/api/transaction",
+     *     description="Retorna todas as transações do usuários",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Transações retornados com sucesso.",
+     *     )
+     * ),
+    */
+
     public function index()
     {   
         $idUser = Auth::user()->id_user;
@@ -28,7 +40,6 @@ class TransactionController extends Controller
                                             ->get();
                                             
         return TransactionResource::collection($allTransactions);
-    
     }
 
     public function store(Request $request)
