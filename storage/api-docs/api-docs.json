@@ -78,13 +78,53 @@
         "/api/transaction": {
             "get": {
                 "tags": [
-                    "Transaction"
+                    "transaction"
                 ],
                 "description": "Retorna todas as transações do usuários",
                 "operationId": "App\\Http\\Controllers\\TransactionController::index",
                 "responses": {
                     "200": {
                         "description": "Transações retornados com sucesso."
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "transaction"
+                ],
+                "description": "Criando nova transação",
+                "operationId": "App\\Http\\Controllers\\TransactionController::store",
+                "parameters": [
+                    {
+                        "name": "amount",
+                        "in": "query",
+                        "description": "Valor da transação",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "document",
+                        "in": "query",
+                        "description": "Documento do beneficiário",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Registrado com sucesso."
+                    },
+                    "422": {
+                        "description": "Dados ausentes ou inconsistentes."
                     }
                 },
                 "security": [

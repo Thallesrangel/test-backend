@@ -23,7 +23,7 @@ class TransactionController extends Controller
     
     /**
      * @OA\Get(
-     *     tags={"Transaction"},
+     *     tags={"transaction"},
      *     path="/api/transaction",
      *     security={{"bearer_token":{}}},
      *     description="Retorna todas as transações do usuários",
@@ -44,6 +44,41 @@ class TransactionController extends Controller
                                             
         return TransactionResource::collection($allTransactions);
     }
+
+    /**
+     * @OA\Post(
+     *     tags={"transaction"},
+     *     path="/api/transaction",
+     *     security={{"bearer_token":{}}},
+     *     description="Criando nova transação",
+     *     @OA\Parameter(
+     *         name="amount",
+     *         in="query",
+     *         description="Valor da transação",
+     *         required=true,
+     *          @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="document",
+     *         in="query",
+     *         description="Documento do beneficiário",
+     *         required=true,
+     *          @OA\Schema(
+     *             type="string"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Registrado com sucesso.",
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Dados ausentes ou inconsistentes."
+     *     )
+     * )
+    */
 
     public function store(TransactionRequest $request)
     {   
