@@ -9,17 +9,17 @@ use App\Model\User;
 use App\Model\Wallet;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
-
 use App\Http\Requests\UserRequest;
+use App\Repositories\UserRepository;
 
 class UserController extends Controller
 {
     protected $user;
 
-    public function __construct()
+    public function __construct(User $user)
     {
         $this->middleware('apiJwt')->except(['store']);
-        $this->user = new User();
+        $this->user = $user;
     }
 
     /**
@@ -36,11 +36,8 @@ class UserController extends Controller
 
     public function index()
     {
-        $data = $this->user::with('category')
-                            ->where('id_user', '=', Auth::user()->id_user)
-                            ->where('flag_excluido', '=', 0)
-                            ->get();
-        return UserResource::collection($data);
+        $userRepository = new UserRepository($this->user);
+        return UserResource::collection($userRepository->selectAllUser());
     }
 
     /**

@@ -4,6 +4,10 @@ API RESTful
 
 **Framework:** Laravel
 
+## Configurando o laravel
+
+1. composer install
+
 ## 📀 Instalação do Docker
 
 [Download do Docker](https://www.docker.com/products/docker-desktop)
@@ -15,7 +19,9 @@ Por não ter disponível o OS Linux, fiz a configuração com o Windows
 1. docker-compose up
 2. docker exec -it test-php bash
 3. cd app
-4. php artisan migrate
+4. php artisan config:cache
+5. php artisan migrate
+6. php artisan db:seed --class=UserCategorySeeder
 
 #### Opcionais 
 
