@@ -11,13 +11,6 @@ use Tymon\JWTAuth\Exceptions\{TokenExpiredException, TokenInvalidException};
 
 class apiProtectedRoute extends BaseMiddleware
 {
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @return mixed
-     */
     public function handle($request, Closure $next)
     {
         try {

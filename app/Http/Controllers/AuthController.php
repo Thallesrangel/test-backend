@@ -60,17 +60,9 @@ class AuthController extends Controller
      *   tags={"Authentication"},
      *   summary="Logout",
      *   operationId="logout",
-     *   @OA\SecurityScheme(
-     *      securityScheme="bearerAuth",
-     *      in="header",
-     *      name="bearerAuth",
-     *      type="http",
-     *      scheme="bearer",
-     *      bearerFormat="JWT",
-     *   ),
      *   @OA\Response(response=200, description="Deslogado com sucesso", @OA\MediaType( mediaType="application/json")),
      *   @OA\Response(response=401, description="Não autenticado"),
-     *   @OA\Response(response=422, description="Informe o token"),
+     *   @OA\Response(response=422, description="Informe o token")
      *)
      **/
 

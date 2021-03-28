@@ -70,6 +70,25 @@
                 }
             }
         },
+        "/api/transaction": {
+            "get": {
+                "tags": [
+                    "Transaction"
+                ],
+                "description": "Retorna todas as transações do usuários",
+                "operationId": "App\\Http\\Controllers\\TransactionController::index",
+                "responses": {
+                    "200": {
+                        "description": "Transações retornados com sucesso."
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
+            }
+        },
         "/api/user": {
             "get": {
                 "tags": [
@@ -81,7 +100,12 @@
                     "200": {
                         "description": "Usuários retornados com sucesso."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
             },
             "post": {
                 "tags": [
@@ -171,7 +195,12 @@
                     "422": {
                         "description": "Usuário informado não encontrado."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
             }
         },
         "/api/wallet/{user}": {
@@ -200,6 +229,14 @@
                         "description": "Usuário informado não encontrado."
                     }
                 }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearer_token": {
+                "type": "http",
+                "scheme": "bearer"
             }
         }
     },

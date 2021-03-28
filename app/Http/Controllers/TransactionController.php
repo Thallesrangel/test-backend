@@ -25,11 +25,13 @@ class TransactionController extends Controller
      * @OA\Get(
      *     tags={"Transaction"},
      *     path="/api/transaction",
+     *     security={{"bearer_token":{}}},
      *     description="Retorna todas as transações do usuários",
      *     @OA\Response(
      *         response=200,
      *         description="Transações retornados com sucesso.",
-     *     )
+     *     ),
+
      * ),
     */
 

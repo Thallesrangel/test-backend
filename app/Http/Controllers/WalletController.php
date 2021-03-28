@@ -23,6 +23,7 @@ class WalletController extends Controller
      * @OA\Get(
      *     tags={"wallet"},
      *     path="/api/wallet/{user}",
+     *     security={{"bearer_token":{}}},
      *     description="Retorna a carteira do usuário",
      *     @OA\Parameter(
      *         name="user",
@@ -61,8 +62,4 @@ class WalletController extends Controller
         return new WalletResource($wallet);
     }
 
-    public function update(Request $request, $id)
-    {
-        // Add transaction amount 
-    }
 }

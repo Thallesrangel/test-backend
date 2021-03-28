@@ -26,6 +26,7 @@ class UserController extends Controller
      * @OA\Get(
      *     tags={"user"},
      *     path="/api/user",
+     *     security={{"bearer_token":{}}},
      *     description="Retorna todos os usuários",
      *     @OA\Response(
      *         response=200,
@@ -127,6 +128,7 @@ class UserController extends Controller
      * @OA\Get(
      *     tags={"user"},
      *     path="/api/user/{user}",
+     *     security={{"bearer_token":{}}},
      *     description="Retorna o usuário com id especificado",
      *     @OA\Parameter(
      *         name="user",
@@ -188,7 +190,7 @@ class UserController extends Controller
 
         return new UserResource($data);
     }
-
+    
     public function destroy($idUser)
     {
         if ( !$data = $this->user->find($idUser) ) {

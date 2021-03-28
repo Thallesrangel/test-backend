@@ -141,18 +141,11 @@ return [
                 */
             ],
             'security' => [
-                /*
-                 * Examples of Securities
-                */
-                [
-                    /*
-                    'oauth2_security_example' => [
-                        'read',
-                        'write'
-                    ],
-
-                    'passport' => []
-                    */
+                'bearer_token' => [
+                    'type' => 'apiKey',
+                    'description' => 'Enter token in format (Bearer <token>)',
+                    'name' => 'Authorization',
+                    'in' => 'header',
                 ],
             ],
         ],
