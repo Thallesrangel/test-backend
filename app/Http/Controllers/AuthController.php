@@ -58,6 +58,7 @@ class AuthController extends Controller
      * @OA\Post(
      ** path="/api/auth/logout",
      *   tags={"Authentication"},
+     *     security={{"bearer_token":{}}},
      *   summary="Logout",
      *   operationId="logout",
      *   @OA\Response(response=200, description="Deslogado com sucesso", @OA\MediaType( mediaType="application/json")),
