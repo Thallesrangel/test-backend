@@ -195,20 +195,58 @@ class UserController extends Controller
         return new UserResource($data);
     }
     
+    /**
+     * @OA\Delete(
+     *     tags={"user"},
+     *     path="/api/user/{user}",
+     *     security={{"bearer_token":{}}},
+     *     description="Excluir usuário",
+     *     @OA\Parameter(
+     *         name="user",
+     *         in="path",
+     *         description="ID do usuário",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Usuários deletado com sucesso.",
+     *     ),
+     *     @OA\Response(
+     *      response=401,
+     *      description="Não autorizado."
+     *     ),
+     *     @OA\Response(
+     *      response=404,
+     *      description="Usuário não encontrado."
+     *     ),
+     *     @OA\Response(
+     *      response=500,
+     *      description="Usuário não deletado."
+     *     ),
+     * ),
+    */
+
     public function destroy($idUser)
     {
         if ( !$data = $this->user->find($idUser) ) {
-            return response()->json(['error' => 'usuário informado não encontrado.'], 404);
+            return response()->json(['error' => 'Usuário informado não encontrado.'], 404);
         }
 
         if ( $data->id_user != Auth::user()->id_user ) {
             throw ValidationException::withMessages(['user_acess_forbidden' => 'Acesso ao usuário negado!']);
         }
 
+        if ($data->flag_excluido == 1) {
+            throw ValidationException::withMessages(['user_deleted' => 'Usuário já deletado.']);
+        }
+
         $data->flag_excluido = 1;
         
         if ( !$delete = $data->save() ) {
-            return response()->json(['error' => 'usuário não deletado', 500]);
+            return response()->json(['error' => 'Não foi possível deletar o usuário informado.', 500]);
         }
 
         return response()->json(['response' => $delete], 200);

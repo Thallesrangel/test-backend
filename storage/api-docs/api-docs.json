@@ -266,6 +266,43 @@
                         "bearer_token": []
                     }
                 ]
+            },
+            "delete": {
+                "tags": [
+                    "user"
+                ],
+                "description": "Excluir usuário",
+                "operationId": "App\\Http\\Controllers\\UserController::destroy",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "path",
+                        "description": "ID do usuário",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Usuários deletado com sucesso."
+                    },
+                    "401": {
+                        "description": "Não autorizado."
+                    },
+                    "404": {
+                        "description": "Usuário não encontrado."
+                    },
+                    "500": {
+                        "description": "Usuário não deletado."
+                    }
+                },
+                "security": [
+                    {
+                        "bearer_token": []
+                    }
+                ]
             }
         },
         "/api/wallet/{user}": {
@@ -302,7 +339,12 @@
             }
         }
     },
-    "security": [
-        []
-    ]
+    "security": {
+        "bearer_token": {
+            "type": "apiKey",
+            "description": "Enter token in format (Bearer <token>)",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
 }
