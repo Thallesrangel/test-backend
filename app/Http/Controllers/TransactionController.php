@@ -27,14 +27,8 @@ class TransactionController extends Controller
      *     path="/api/transaction",
      *     security={{"bearer_token":{}}},
      *     description="Retorna todas as transações do usuários",
-     *     @OA\Response(
-     *         response=200,
-     *         description="Transações retornados com sucesso.",
-     *     ),
-     *     @OA\Response(
-     *      response=401,
-     *      description="Não autorizado"
-     *     ),
+     *     @OA\Response(response=200, description="Transações retornados com sucesso."),
+     *     @OA\Response(response=401, description="Não autorizado"),
      * ),
     */
 
@@ -72,14 +66,8 @@ class TransactionController extends Controller
      *             type="string"
      *         )
      *     ),
-     *     @OA\Response(
-     *         response=201,
-     *         description="Registrado com sucesso.",
-     *     ),
-     *     @OA\Response(
-     *         response=422,
-     *         description="Dados ausentes ou inconsistentes."
-     *     )
+     *     @OA\Response(response=201, description="Registrado com sucesso."),
+     *     @OA\Response(response=422,description="Dados ausentes ou inconsistentes.")
      * )
     */
 

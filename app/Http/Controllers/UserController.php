@@ -28,14 +28,8 @@ class UserController extends Controller
      *     path="/api/user",
      *     security={{"bearer_token":{}}},
      *     description="Retorna todos os usuários",
-     *     @OA\Response(
-     *         response=200,
-     *         description="Usuários retornados com sucesso.",
-     *     ),
-     *     @OA\Response(
-     *      response=401,
-     *      description="Não autorizado"
-     *     ),
+     *     @OA\Response(response=200, description="Usuários retornados com sucesso."),
+     *     @OA\Response(response=401, description="Não autorizado"),
      * ),
     */
 
@@ -95,14 +89,9 @@ class UserController extends Controller
      *             type="string",
      *         )
      *     ),
-     *     @OA\Response(
-     *         response=201,
-     *         description="Registrado com sucesso.",
+     *     @OA\Response(response=201, description="Registrado com sucesso."
      *     ),
-     *     @OA\Response(
-     *         response=422,
-     *         description="Dados ausentes."
-     *     )
+     *     @OA\Response(response=422, description="Dados ausentes.")
      * )
     */
 
@@ -143,14 +132,8 @@ class UserController extends Controller
      *             type="integer",
      *         )
      *     ),
-     *     @OA\Response(
-     *         response=200,
-     *         description="Usuário retornado com sucesso.",
-     *     ),
-     *      @OA\Response(
-     *         response=422,
-     *         description="Usuário informado não encontrado.",
-     *      )
+     *     @OA\Response(response=200, description="Usuário retornado com sucesso."),
+     *     @OA\Response(response=422, description="Usuário informado não encontrado.")
      * )
     */
 
@@ -210,22 +193,10 @@ class UserController extends Controller
      *             type="integer",
      *         )
      *     ),
-     *     @OA\Response(
-     *         response=200,
-     *         description="Usuários deletado com sucesso.",
-     *     ),
-     *     @OA\Response(
-     *      response=401,
-     *      description="Não autorizado."
-     *     ),
-     *     @OA\Response(
-     *      response=404,
-     *      description="Usuário não encontrado."
-     *     ),
-     *     @OA\Response(
-     *      response=500,
-     *      description="Usuário não deletado."
-     *     ),
+     *     @OA\Response(response=200, description="Usuários deletado com sucesso."),
+     *     @OA\Response(response=401, description="Não autorizado."),
+     *     @OA\Response(response=404, description="Usuário não encontrado."),
+     *     @OA\Response(response=500, description="Usuário não deletado."),
      * ),
     */
 

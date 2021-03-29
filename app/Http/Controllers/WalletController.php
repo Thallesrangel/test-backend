@@ -26,18 +26,9 @@ class WalletController extends Controller
      *     path="/api/wallet/{user}",
      *     security={{"bearer_token":{}}},
      *     description="Retorna a carteira do usuário",
-     *     @OA\Response(
-     *         response=200,
-     *         description="Carteira do usuário informada, retorna informações",
-     *     ),
-     *     @OA\Response(
-     *      response=401,
-     *      description="Não autorizado"
-     *     ),
-     *     @OA\Response(
-     *         response=422,
-     *         description="Usuário informado não encontrado."
-     *     )
+     *     @OA\Response(response=200, description="Carteira do usuário informada, retorna informações"),
+     *     @OA\Response(response=401,description="Não autorizado"),
+     *     @OA\Response(response=422, description="Usuário informado não encontrado.")
      * )
     */
 
