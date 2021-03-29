@@ -4,9 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\UserCategoryResource;
 use App\Model\UserCategory;
+use App\Repositories\UserCategoryRepository;
 
 class UserCategoryController extends Controller
 {
+    protected $userCategory;
+
+    public function __construct(UserCategory $userCategory)
+    {
+        $this->userCategory = $userCategory;
+    }
+
     /**
      * @OA\Get(
      *     tags={"user category"},
@@ -20,7 +28,7 @@ class UserCategoryController extends Controller
     */
     public function index()
     {
-        $userCategory = UserCategory::get();
-        return UserCategoryResource::collection($userCategory);
+        $userCategoryRepository = new UserCategoryRepository($this->userCategory);
+        return UserCategoryResource::collection($userCategoryRepository->selectAllUserCategory());
     }
 }
