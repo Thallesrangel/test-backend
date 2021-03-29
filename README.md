@@ -54,3 +54,15 @@ Dentro da pasta .docker, excluir as pastas logs e data
 
 ## Comando para executar testes com PHPUnit
 - vendor/bin/phpunit tests
+
+
+# 🔑 Gerando Diagrama ER
+
+1. docker exec -it test-php bash
+2. cd app
+3. php artisan generate:erd --format=text
+4. copiar todas as informações apresentadas no terminal conforme o exemplo do link
+
+*Diagrama ER mais recente, encontra-se na raiz da aplicação, disponível em .png e .svg*
+
+[Link para gerar novo diagrama ER]('https://dreampuf.github.io/GraphvizOnline')
