@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\AuthRequest;
 
 class AuthController extends Controller
 {
@@ -42,9 +43,10 @@ class AuthController extends Controller
      *)
      **/
     
-    public function login(Request $request)
+    public function login(AuthRequest $request)
     {
-        // Validação
+        $request->validated();
+
         $credentials = $request->only(['email', 'password']);
        
         if (!$token = auth('api')->attempt($credentials)) {
