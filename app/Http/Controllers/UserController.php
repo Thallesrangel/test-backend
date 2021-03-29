@@ -156,6 +156,30 @@ class UserController extends Controller
         return new UserResource($user);
     }
 
+    /**
+     * @OA\PUT(
+     *     path="/api/user/{user}",
+     *     tags={"user"},
+     *     security={{"bearer_token":{}}},
+     *     description="Atualizar usuário",
+     *     @OA\Parameter(name="user", description="ID do usuário", required=true, in="path", @OA\Schema(type="integer")),
+     *     @OA\RequestBody(
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(property="name", type="string", example="Paulo Roberto"),
+     *              @OA\Property(property="id_user_category", type="integer", example="1"),
+     *              @OA\Property(property="document", type="string", example="3551554"),
+     *              @OA\Property(property="email", type="string", example="exemple@gmail.com"),
+     *              @OA\Property(property="password", type="string", example="123"),
+     *          ),
+     *      ),
+     *     operationId="update",
+     *     @OA\Response( response=200, description="Atualizado com sucesso." ),
+     *     @OA\Response(response=401, description="Não autorizado."),
+     *     @OA\Response(response=404, description="Usuário não encontrado"),
+     * )
+    */
+
     public function update(UserRequest $request, $idUser)
     {
 
@@ -169,12 +193,9 @@ class UserController extends Controller
             throw ValidationException::withMessages(['user_acess_forbidden' => 'Acesso ao usuário negado.']);
         }
 
-        $validated = $request->validated();
-
-        if ($validated) {
-            $data->update($request->all());
-        }
-
+        $request->validated();
+        $data->update($request->all());
+        
         return new UserResource($data);
     }
     
