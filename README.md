@@ -65,4 +65,4 @@ Dentro da pasta .docker, excluir as pastas logs e data
 
 *Diagrama ER mais recente, encontra-se na raiz da aplicação, disponível em .png e .svg*
 
-[Link para gerar novo diagrama ER]('https://dreampuf.github.io/GraphvizOnline')
+[Link para gerar novo diagrama ER](https://dreampuf.github.io/GraphvizOnline)
