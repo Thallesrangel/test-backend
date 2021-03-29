@@ -85,6 +85,9 @@
                 "responses": {
                     "200": {
                         "description": "Transações retornados com sucesso."
+                    },
+                    "401": {
+                        "description": "Não autorizado"
                     }
                 },
                 "security": [
@@ -134,6 +137,20 @@
                 ]
             }
         },
+        "/api/user_category": {
+            "get": {
+                "tags": [
+                    "user category"
+                ],
+                "description": "Retorna todas as categorias de usuário",
+                "operationId": "App\\Http\\Controllers\\UserCategoryController::index",
+                "responses": {
+                    "200": {
+                        "description": "Transações retornados com sucesso."
+                    }
+                }
+            }
+        },
         "/api/user": {
             "get": {
                 "tags": [
@@ -144,6 +161,9 @@
                 "responses": {
                     "200": {
                         "description": "Usuários retornados com sucesso."
+                    },
+                    "401": {
+                        "description": "Não autorizado"
                     }
                 },
                 "security": [

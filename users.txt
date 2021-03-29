@@ -1,0 +1,26 @@
+name:             Thalles Rangel Lopes
+id_user_catogory: 1
+document:         14653561770
+email:            rangelthr@gmail.com
+password:         th1234
+
+
+name:             Micaelly Reges
+id_user_catogory: 1
+document:         22124404725   
+email:            micareges@gmail.com
+password:         mica
+
+
+name:             Gabriel Antunes
+id_user_catogory: 1
+document:         85791451717
+email:            gabrielantunes@gmail.com
+password:         ga1234
+
+
+name:             Playstation Store
+id_user_catogory: 2
+document:         35047060000144
+email:            store@psn.com
+password:         playstore

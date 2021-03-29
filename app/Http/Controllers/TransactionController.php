@@ -31,7 +31,10 @@ class TransactionController extends Controller
      *         response=200,
      *         description="Transações retornados com sucesso.",
      *     ),
-
+     *     @OA\Response(
+     *      response=401,
+     *      description="Não autorizado"
+     *     ),
      * ),
     */
 

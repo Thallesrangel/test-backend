@@ -31,6 +31,10 @@ class WalletController extends Controller
      *         description="Carteira do usuário informada, retorna informações",
      *     ),
      *     @OA\Response(
+     *      response=401,
+     *      description="Não autorizado"
+     *     ),
+     *     @OA\Response(
      *         response=422,
      *         description="Usuário informado não encontrado."
      *     )

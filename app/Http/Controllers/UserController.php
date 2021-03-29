@@ -31,7 +31,11 @@ class UserController extends Controller
      *     @OA\Response(
      *         response=200,
      *         description="Usuários retornados com sucesso.",
-     *     )
+     *     ),
+     *     @OA\Response(
+     *      response=401,
+     *      description="Não autorizado"
+     *     ),
      * ),
     */
 
@@ -121,7 +125,7 @@ class UserController extends Controller
         $wallet->amount = 0;
         $wallet->save();
         
-        return response()->json(['success' => 'registered'], 201);
+        return response()->json(['success' => 'Registrado com sucesso.'], 201);
     }
 
     /**
