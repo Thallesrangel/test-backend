@@ -55,7 +55,7 @@ class TransactionController extends Controller
      *     security={{"bearer_token":{}}},
      *     description="Criando nova transação",
      *     @OA\Parameter(
-     *         name="amount",
+     *         name="value",
      *         in="query",
      *         description="Valor da transação",
      *         required=true,
@@ -140,7 +140,7 @@ class TransactionController extends Controller
             throw ValidationException::withMessages(['error' => 'Algo de errado não está certo.']);
         }
     
-        return response()->json(['success' => 'Transação realizada com sucesso', 200]);
+        return response()->json(['success' => 'Transação realizada com sucesso', 201]);
     }
 
     public function show($idTransaction)

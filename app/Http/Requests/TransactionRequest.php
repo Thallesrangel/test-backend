@@ -24,8 +24,8 @@ class TransactionRequest extends FormRequest
     public function rules()
     {
         $rules = [
-            'amount' => 'required',
-            'document' => 'required|integer'
+            'value' => 'required',
+            'document' => 'required'
         ];
 
         return $rules;
@@ -35,7 +35,7 @@ class TransactionRequest extends FormRequest
     {
         return [
             'required' => 'Campo obrigatório',
-            'amount.required' => 'Informe o valor',
+            'value.required' => 'Informe o valor',
             'document.required' => 'Informe o documento do beneficiário'
         ];
     }

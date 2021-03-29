@@ -104,7 +104,7 @@
                 "operationId": "App\\Http\\Controllers\\TransactionController::store",
                 "parameters": [
                     {
-                        "name": "amount",
+                        "name": "value",
                         "in": "query",
                         "description": "Valor da transação",
                         "required": true,
@@ -278,6 +278,9 @@
                 "responses": {
                     "200": {
                         "description": "Carteira do usuário informada, retorna informações"
+                    },
+                    "401": {
+                        "description": "Não autorizado"
                     },
                     "422": {
                         "description": "Usuário informado não encontrado."
