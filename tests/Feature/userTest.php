@@ -4,9 +4,12 @@ namespace Tests\Feature;
 
 use App\User;
 use Tests\TestCase;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class UserTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function testRequiredFieldsForRegistration()
     {
         $this->json('POST', 'api/user', ['Accept' => 'application/json'])
@@ -23,17 +26,17 @@ class UserTest extends TestCase
             ]);
     }
 
-    public function createUser()
+    public function test_created_user()
     {
         $data = [
-            'name' => $this->faker->firstName,
-            'id_user_category' => $this->faker->sentence,
-            'document' => '123',
-            'email' => $this->faker->email,
-            'password' => $this->faker->password
+            'name' => 'simple example',
+            'id_user_category' => '1',
+            'document' => 'simple',
+            'email' => 'simple@example.com',
+            'password' => 'simple123'
         ];
-
-        $this->post(route('user.post'), $data)
-            ->assertStatus(201);
+        
+        $response = $this->postJson('/api/user', $data);
+        $response->assertStatus(201);
     }
 }
