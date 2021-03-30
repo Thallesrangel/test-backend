@@ -5,7 +5,7 @@ namespace Tests\Feature;
 use App\User;
 use Tests\TestCase;
 
-class userTest extends TestCase
+class UserTest extends TestCase
 {
     public function testRequiredFieldsForRegistration()
     {
@@ -21,5 +21,19 @@ class userTest extends TestCase
                     "password" => ["Campo senha é obrigatório"],
                 ]
             ]);
+    }
+
+    public function createUser()
+    {
+        $data = [
+            'name' => $this->faker->firstName,
+            'id_user_category' => $this->faker->sentence,
+            'document' => '123',
+            'email' => $this->faker->email,
+            'password' => $this->faker->password
+        ];
+
+        $this->post(route('user.post'), $data)
+            ->assertStatus(201);
     }
 }
