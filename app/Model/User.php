@@ -5,8 +5,9 @@ namespace App\Model;
 use Illuminate\Database\Eloquent\Model;
 use App\model\UserCategory;
 use App\model\Wallet;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Model
+class User extends Model implements JWTSubject
 {
     protected $table = "users";
     protected $primaryKey  = 'id_user';
@@ -21,5 +22,20 @@ class User extends Model
     public function wallet()
     {
         return $this->belongsTo(Wallet::class, 'id_user');
+    }
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }
