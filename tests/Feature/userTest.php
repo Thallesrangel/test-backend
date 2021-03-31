@@ -69,4 +69,22 @@ class UserTest extends TestCase
         $test = $this->json('GET','/api/user/'. $user->id_user, [],$this->headers($user));
         $test->assertStatus(200);
     }
+
+    public function test_user_update()
+    {
+        factory(User::class)->create([
+            'name' => 'Test Example',
+            'document' => '123',
+            'email' => 'example@test.com',
+            'id_user_category' => '1',
+            'password' => 'example123',
+        ]);
+    
+        $user = User::first();
+        $user->id_user_category = 2;
+        $user->save();
+    
+        $response = $this->json('GET','/api/user/', [], $this->headers($user));
+        $response->assertStatus(200);
+    }
 }
