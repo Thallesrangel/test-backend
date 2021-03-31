@@ -36,6 +36,8 @@ RUN docker-php-ext-install pdo_mysql && \
     docker-php-ext-install mbstring && \
     docker-php-ext-install gettext
 
+RUN pecl install xdebug \
+    && docker-php-ext-enable xdebug
 # Cleanup
 RUN rm -rf /usr/src/* && \
     rm -rf /var/lib/apt/lists/*
